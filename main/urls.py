@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include 
 from django.conf.urls import url
 from . import views
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView,PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView, PasswordResetCompleteView
@@ -22,6 +22,12 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),  
     path('logout/', views.user_logout, name='logout'),  
 
+    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    path('api/password_reset/confirm/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+    path('api/password_reset/confirm/validate_token/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+
+  
+
     path('search/', views.search, name='search'),   
     path('change-password/', PasswordChangeView.as_view(template_name='change-password.html', form_class=Changepasswordform), name='change-password'),
     path('password_change_done/', PasswordChangeDoneView.as_view(template_name='password_change_done.html'), name='password_change_done'),  
@@ -32,4 +38,4 @@ urlpatterns = [
     path('password_reset_done/', PasswordResetDoneView.as_view(template_name='passwordResetDone.html'), name="password_reset_done"),
     path('password-reset-complete/', PasswordResetCompleteView.as_view(template_name='passwordSuccessful.html'), name="password_reset_complete"), 
     
-]     
+]       

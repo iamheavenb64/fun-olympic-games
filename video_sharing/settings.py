@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'django_rest_passwordreset',
     'main'
 ]
 
@@ -124,9 +126,23 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main/static')
 ]
 
-MEDIA_ROOT = '/Users/arjunsedai/djangoPractise/online-video-sharing-website/video_sharing/main/static/media'
+MEDIA_ROOT = '/Users/arjunsedai/djangoPractise/funOlympics/video_sharing/main/static/media'  
 MEDIA_URL = 'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJANGO_REST_LOOKUP_FIELD = 'custom_email_field'
+DJANGO_REST_PASSWORDRESET_IP_ADDRESS_HEADER = 'HTTP_X_FORWARDED_FOR'
+HTTP_USER_AGENT_HEADER = 'HTTP_USER_AGENT'
+
+DJANGO_REST_PASSWORDRESET_TOKEN_CONFIG = {
+    "CLASS": "django_rest_passwordreset.tokens.RandomStringTokenGenerator",
+    "OPTIONS": {
+        "min_length": 20,
+        "max_length": 30 
+    }
+}    
+# smtp connection
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    
